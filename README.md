@@ -1,4 +1,4 @@
-# my first scripts by me
+# my first scripts
 
 Welcome to my DevOps Course Scripts Repository! 🚀
 

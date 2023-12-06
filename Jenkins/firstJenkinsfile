@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    tools {
+        maven "MAVEN3"
+        jdk "OracleJDK11"
+    }
+    stages {
+        stage('Fetch code') {
+            steps {
+                git branch: 'main' , url: 'https://github.com/hkhcoder/vprofile-project.git' 
+            }
+        }
+        stage('Build'){
+            steps{
+                sh 'mvn install -Dskiptests'
+            }
+            post{
+                success {
+                    echo 'Archiving artifact Now'
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+        stage('unit test'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+    }
+}
